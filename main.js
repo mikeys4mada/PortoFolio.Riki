@@ -35,10 +35,7 @@ function animateCards(section) {
   });
 }
 
-function logout() {
-  localStorage.removeItem("isLoggedIn");
-  window.location.href = "index.html";
-}
+
 
 // Animate skill bars
 function animateSkillBars() {
@@ -79,6 +76,35 @@ function openInstagram() {
   const instagramUsername = 'rikisaputraanwar';
   const url = `https://instagram.com/${instagramUsername}`;
   window.open(url, '_blank');
+}
+
+// Modal functionality for image zoom
+const modal = document.getElementById('imageModal');
+const modalImg = document.getElementById('modalImg');
+const closeBtn = document.querySelector('.close');
+const profileImg = document.getElementById('profileImg');
+
+profileImg.onclick = function() {
+  // Add zoom-in class for animation
+  this.classList.add('zoom-in');
+  // Add circular class to avatar for shape change
+  const avatar = this.parentElement;
+  avatar.classList.add('circular');
+  setTimeout(() => {
+    modal.style.display = 'flex';
+    modalImg.src = this.src;
+    this.classList.remove('zoom-in');
+  }, 300);
+}
+
+closeBtn.onclick = function() {
+  modal.style.display = 'none';
+}
+
+window.onclick = function(event) {
+  if (event.target === modal) {
+    modal.style.display = 'none';
+  }
 }
 
 // Add fade-in animation on page load
